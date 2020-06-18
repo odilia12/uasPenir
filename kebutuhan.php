@@ -5,7 +5,7 @@ require_once('database.php');
 require_once('functions.php');
 
 $sql = $conn->query("
-	SELECT k.id as id, k.kebutuhan as kebutuhan, k.deskripsi as deskripsi, k.satuan as satuan, k.nilai as nilai, d.nilai as progress FROM kebutuhan k left join detail_donasi d on k.id=d.id_kebutuhan
+	SELECT k.id as id, k.kebutuhan as kebutuhan, k.deskripsi as deskripsi, k.satuan as satuan, k.nilai as nilai, IFNULL(d.nilai, 0) as progress FROM kebutuhan k left join detail_donasi d on k.id=d.id_kebutuhan
 	");
 
 if($sql){ 	
