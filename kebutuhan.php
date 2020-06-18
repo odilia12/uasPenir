@@ -5,7 +5,7 @@ require_once('database.php');
 require_once('functions.php');
 
 $sql = $conn->query("
-	SELECT id, kebutuhan, deskripsi, satuan, nilai FROM kebutuhan
+	SELECT k.id as id, k.kebutuhan as kebutuhan, k.deskripsi as deskripsi, k.satuan as satuan, k.nilai as nilai, d.nilai as progress FROM kebutuhan k left join detail_donasi d on k.id=d.id_kebutuhan
 	");
 
 if($sql){ 	
@@ -17,6 +17,7 @@ if($sql){
 		$datas['datas'][$i]['deskripsi'] = $res['deskripsi'];
 		$datas['datas'][$i]['satuan'] = $res['satuan'];
 		$datas['datas'][$i]['nilai'] = $res['nilai'];
+		$datas['datas'][$i]['progress'] = $res['progress'];
 		$i++;
 	}
 	echo json_encode($datas);
