@@ -4,6 +4,8 @@ header("Access-Control-Allow-Origin: *");
 require_once('database.php');
 require_once('functions.php');
 
+$RET = array('hasil' => 'ERR');
+
 $username = sanitize($_POST['username']);
 $tanggal = date("Y-m-d");
 $id_kebutuhan = $_POST['id_kebutuhan'];
@@ -35,17 +37,10 @@ if ($sql) {
 		$sql3 = $conn7->query($query2);
 
 		if($sql3){
-			echo json_encode("SUC");
-		}
-		else{
-			echo "gagal menambah donasi";
+			$RET = array('hasil' => 'SUC');
 		}
 	}
-	else{
-		echo "gagal menambah donasi";
-	}
-} 
-else{
-		echo "gagal menambah donasi";
 }
+
+echo json_encode($RET);
 ?>
