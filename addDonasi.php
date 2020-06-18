@@ -6,10 +6,13 @@ require_once('functions.php');
 
 $RET = array('hasil' => 'ERR');
 
-$username = sanitize($_POST['username']);
+// $username = sanitize($_POST['email_user']);
+$username = "r@g.com";
 $tanggal = date("Y-m-d");
-$id_kebutuhan = $_POST['id_kebutuhan'];
-$nilai = $_POST['nilai'];
+// $id_kebutuhan = $_POST['id_kebutuhan'];
+$id_kebutuhan = 2;
+// $nilai = $_POST['nilai'];
+$nilai = 20;
 
 $query = "INSERT INTO donasi (tanggal, email_user) 
 		VALUES ('$tanggal','$username')";
@@ -40,6 +43,7 @@ if ($sql) {
 			$RET = array('hasil' => 'SUC');
 		}
 	}
+	// echo "berhasil";
 }
 
 echo json_encode($RET);
