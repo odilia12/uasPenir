@@ -35,7 +35,7 @@ if ($sql) {
 		$sql3 = $conn7->query($query2);
 
 		if($sql3){
-			echo json_encode("success");
+			echo json_encode("SUC");
 		}
 		else{
 			echo "gagal menambah donasi";
