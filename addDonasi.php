@@ -5,7 +5,9 @@ require_once('database.php');
 require_once('functions.php');
 
 $username = sanitize($_POST['username']);
-$tanggal = $_POST['bod'];
+$tanggal = date("Y-m-d");
+$id_kebutuhan = $_POST['id_kebutuhan'];
+$nilai = $_POST['nilai'];
 
 $query = "INSERT INTO donasi (tanggal, email_user) 
 		VALUES ('$tanggal','$username')";
