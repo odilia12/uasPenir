@@ -6,44 +6,36 @@ require_once('functions.php');
 
 $RET = array('hasil' => 'ERR');
 
-// $username = sanitize($_POST['email_user']);
-$username = "r@g.com";
-$tanggal = date("Y-m-d");
-// $id_kebutuhan = $_POST['id_kebutuhan'];
-$id_kebutuhan = 2;
-// $nilai = $_POST['nilai'];
-$nilai = 20;
+$email = sanitize($_POST['email']);
+$tanggal = date("Y-m-d h:i:s");
+$id_kebutuhan = $_POST['id_kebutuhan'];
+$nilai = $_POST['nilai'];
 
-$query = "INSERT INTO donasi (tanggal, email_user) 
-		VALUES ('$tanggal','$username')";
-
-$sql = $conn7->query($query);
+$query = "INSERT INTO donasi (tanggal, email_user) VALUES ('$tanggal','$email')";
+$sql = $conn->query($query);
 
 if ($sql) {
-	$sql2 = $conn->query("
-	SELECT id FROM donasi WHERE tanggal = '$tanggal' AND email_user = '$username'
-	");
-	if($sql){ 	
+	$query2 = "	SELECT id FROM donasi WHERE tanggal = '$tanggal' AND email_user = '$email'	";
+	$sql2 = $conn->query($query2);
+
+	if($sql2){ 	
 		$datas = array();
 		$i = 0;
-		while ($res = $sql->fetch_assoc()) {
+		while ($res = $sql2->fetch_assoc()) {
 			$datas['datas'][$i]['id'] = $res['id'];
 			$i++;
 		}
-		echo json_encode($datas);
-
+		
 		$id_donasi = $datas['datas'][0]['id'];
 
 		$query3 = "INSERT INTO detail_donasi (id_donasi, id_kebutuhan, nilai) 
 			VALUES ('$id_donasi','$id_kebutuhan','$nilai')";
-
-		$sql3 = $conn7->query($query2);
+		$sql3 = $conn->query($query3);
 
 		if($sql3){
 			$RET = array('hasil' => 'SUC');
 		}
 	}
-	// echo "berhasil";
 }
 
 echo json_encode($RET);
